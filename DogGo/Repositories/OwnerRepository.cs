@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 
 namespace DogGo.Repositories
 {
-    public class WalkerRepository
+    public class OwnerRepository
     {
         private readonly IConfiguration _config;
 
         // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-        public WalkerRepository(IConfiguration config)
+        public OwnerRepository(IConfiguration config)
         {
             _config = config;
         }
@@ -24,7 +24,7 @@ namespace DogGo.Repositories
             }
         }
 
-        public List<Walker> GetAllWalkers()
+        public List<Owner> GetAllOwners()
         {
             using (SqlConnection conn = Connection)
             {
@@ -32,34 +32,34 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], ImageUrl, NeighborhoodId
-                        FROM Walker
+                        SELECT Id, [Name], Email, NeighborhoodId
+                        FROM Owner
                     ";
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    List<Walker> walkers = new List<Walker>();
+                    List<Owner> owners = new List<Owner>();
                     while (reader.Read())
                     {
-                        Walker walker = new Walker
+                        Owner owner = new Owner
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                         };
 
-                        walkers.Add(walker);
+                        owners.Add(owner);
                     }
 
                     reader.Close();
 
-                    return walkers;
+                    return owners;
                 }
             }
         }
 
-        public Walker GetWalkerById(int id)
+        public Owner GetOwnerById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -67,8 +67,8 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], ImageUrl, NeighborhoodId
-                        FROM Walker
+                        SELECT Id, [Name], Email, NeighborhoodId
+                        FROM Owner
                         WHERE Id = @id
                     ";
 
@@ -78,16 +78,16 @@ namespace DogGo.Repositories
 
                     if (reader.Read())
                     {
-                        Walker walker = new Walker
+                        Owner owner = new Owner
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                         };
 
                         reader.Close();
-                        return walker;
+                        return owner;
                     }
                     else
                     {
