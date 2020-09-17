@@ -120,3 +120,4 @@ C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\Index.cshtml.g.cs
 C:\Users\Jonrr\workspace\DogGo\DogGo\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\Create.cshtml.g.cs
+C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\Delete.cshtml.g.cs
