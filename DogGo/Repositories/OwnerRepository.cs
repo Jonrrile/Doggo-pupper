@@ -59,6 +59,8 @@ namespace DogGo.Repositories
             }
         }
 
+      
+
         public Owner GetOwnerById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -214,3 +216,4 @@ namespace DogGo.Repositories
         }
     }
 }
+  
