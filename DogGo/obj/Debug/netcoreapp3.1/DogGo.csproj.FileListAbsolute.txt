@@ -124,3 +124,4 @@ C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\Edit.cshtml.g.cs
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dog\Index.cshtml.g.cs
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dog\Create.cshtml.g.cs
+C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dog\Delete.cshtml.g.cs
