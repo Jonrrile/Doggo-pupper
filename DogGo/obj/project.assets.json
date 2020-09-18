@@ -6491,11 +6491,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jonrr\\workspace\\DogGo\\DogGo\\DogGo.csproj",
+      "projectUniqueName": "C:\\Users\\Jonrr\\workspace\\Doggo-pupper\\DogGo\\DogGo.csproj",
       "projectName": "DogGo",
-      "projectPath": "C:\\Users\\Jonrr\\workspace\\DogGo\\DogGo\\DogGo.csproj",
+      "projectPath": "C:\\Users\\Jonrr\\workspace\\Doggo-pupper\\DogGo\\DogGo.csproj",
       "packagesPath": "C:\\Users\\Jonrr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jonrr\\workspace\\DogGo\\DogGo\\obj\\",
+      "outputPath": "C:\\Users\\Jonrr\\workspace\\Doggo-pupper\\DogGo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jonrr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6549,7 +6549,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

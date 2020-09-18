@@ -118,5 +118,27 @@ WHERE Id = @id";
                 }
             }
         }
+        public void UpdateDog (Dog dog)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+UPDATE Dog SET 
+[Name] = @name, 
+Breed = @breed,
+OwnerId = @ownerid
+WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@name", dog.Name);
+                    cmd.Parameters.AddWithValue("@breed", dog.Breed);
+                    cmd.Parameters.AddWithValue("@ownerid", dog.OwnerId);
+                    cmd.Parameters.AddWithValue("@id", dog.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
