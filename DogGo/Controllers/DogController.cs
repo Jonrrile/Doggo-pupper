@@ -1,105 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DogGo.Models;
+using DogGo.Models.ViewModels;
 using DogGo.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace DogGo.Controllers
 {
-    public class DogController : Controller
+    [Authorize]
+    public class DogsController : Controller
     {
-        private readonly DogRepository _dogRepo;
-        public DogController(IConfiguration config)
+        private readonly IDogRepository _dogRepository;
+        private readonly IOwnerRepository _ownerRepository;
+
+        public DogsController(IDogRepository dogRepository, IOwnerRepository ownerRepository)
         {
-            _dogRepo = new DogRepository(config);
+            _dogRepository = dogRepository;
+            _ownerRepository = ownerRepository;
         }
-        // GET: DogController
+
+        private int GetCurrentUserId()
+        {
+            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return int.Parse(id);
+        }
+
+        // GET: DogsController
         public ActionResult Index()
         {
-            List<Dog> dogs = _dogRepo.GetAllDogs();
+            int ownerId = GetCurrentUserId();
+            List<Dog> dogs = _dogRepository.GetDogsByOwnerId(ownerId);
             return View(dogs);
         }
 
-        // GET: DogController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: DogController/Create
+        /*
+        // LOOK AT THIS
         public ActionResult Create()
         {
-            return View();
+            // We use a view model because we need the list of Owners in the Create view
+            DogFormViewModel vm = new DogFormViewModel()
+            {
+                Dog = new Dog(),
+            };
+
+            return View(vm);
         }
 
-        // POST: DogController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public ActionResult Create(Dog dog)
         {
             try
             {
-                _dogRepo.AddDog(dog);
-                return RedirectToAction("Index");
-            }
-            catch(Exception ex)
-            {
-                return View(dog);
-            }
-        }
 
-        // GET: DogController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            Dog dog = _dogRepo.GetDogById(id);
-            if (dog == null)
-            {
-                return NotFound();
-            }
-            return View(dog);
-        }
+                dog.OwnerId = GetCurrentUserId();
 
-        // POST: DogController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Dog dog)
-        {
-            try
-            {
-                _dogRepo.UpdateDog(dog);
-                return RedirectToAction("Index");
-            }
-            catch(Exception ex)
-            {
-                return View(dog);
-            }
-        }
+                // LOOK AT THIS
+                //  Let's save a new dog
+                //  This new dog may or may not have Notes and/or an ImageUrl
+                _dogRepository.AddDog(dog);
 
-        // GET: DogController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            Dog dog = _dogRepo.GetDogById(id);
-            return View(dog);
-        }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                // LOOK AT THIS
+                //  When something goes wrong we return to the view
+                //  BUT our view expects a DogFormViewModel object...so we'd better give it one
+                DogFormViewModel vm = new DogFormViewModel()
+                {
+                    Dog = dog,
+                };
 
-        // POST: DogController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Dog dog)
-        {
-            try
-            {
-                _dogRepo.DeleteDog(id);
-                return RedirectToAction("Index");
+                return View(vm);
             }
-            catch(Exception ex)
-            {
-                return View(dog);
-            }
+       */
         }
     }
-}
