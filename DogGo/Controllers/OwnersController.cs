@@ -12,10 +12,10 @@ namespace DogGo.Controllers
 {
     public class OwnersController : Controller
     {
-        private readonly OwnerRepository _ownerRepo;
-        public OwnersController(IConfiguration config)
+        private readonly IOwnerRepository _ownerRepo;
+        public OwnersController(IOwnerRepository ownerRepository)
         {
-            _ownerRepo = new OwnerRepository(config);
+            _ownerRepo = ownerRepository;
         }
         // GET: WalkersController
         public ActionResult Index()
@@ -103,10 +103,11 @@ namespace DogGo.Controllers
                 _ownerRepo.DeleteOwner(id);
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View(owner);
             }
         }
+        }
     }
-}
+

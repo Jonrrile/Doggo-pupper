@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DogGo.Repositories
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         private readonly IConfiguration _config;
 
