@@ -12,10 +12,10 @@ namespace DogGo.Controllers
 {
     public class WalkersController : Controller
     {
-        private readonly WalkerRepository _walkerRepo;
-        public WalkersController(IConfiguration config)
+        private readonly IWalkerRepository _walkerRepo;
+        public WalkersController(IWalkerRepository walkerRepository)
         {
-            _walkerRepo = new WalkerRepository(config);
+            _walkerRepo = walkerRepository;
         }
         // GET: WalkersController
         public ActionResult Index()

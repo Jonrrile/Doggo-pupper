@@ -253,3 +253,4 @@ C:\Users\Jonrr\workspace\Doggo-pupper\DogGo\obj\Debug\netcoreapp3.1\DogGo.dll
 C:\Users\Jonrr\workspace\Doggo-pupper\DogGo\obj\Debug\netcoreapp3.1\DogGo.pdb
 C:\Users\Jonrr\workspace\Doggo-pupper\DogGo\obj\Debug\netcoreapp3.1\DogGo.genruntimeconfig.cache
 C:\Users\Jonrr\workspace\Doggo-pupper\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dog\Edit.cshtml.g.cs
+C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dog\Edit.cshtml.g.cs
