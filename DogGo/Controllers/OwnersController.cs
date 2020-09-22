@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DogGo.Models;
 using DogGo.Models.ViewModels;
 using DogGo.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,14 +20,17 @@ namespace DogGo.Controllers
         private readonly IOwnerRepository _ownerRepo;
         private readonly IDogRepository _dogRepo;
         private readonly IWalkerRepository _walkerRepo;
+        private readonly INeighborhoodRepository _neighborhoodRepo;
         public OwnersController(
             IOwnerRepository ownerRepository,
             IDogRepository dogRepository,
-            IWalkerRepository walkerRepository)
+            IWalkerRepository walkerRepository,
+            INeighborhoodRepository neighborhoodRepository)
         {
             _ownerRepo = ownerRepository;
             _dogRepo = dogRepository;
             _walkerRepo = walkerRepository;
+            _neighborhoodRepo = neighborhoodRepository;
         }
         // GET: WalkersController
         public ActionResult Index()
@@ -52,7 +59,13 @@ namespace DogGo.Controllers
         // GET: OwnerController/Create
         public ActionResult Create()
         {
-            return View();
+            List<Neighborhood> neighborhoods = _neighborhoodRepo.GetAll();
+            OwnerFormViewModel vm = new OwnerFormViewModel()
+            {
+                Owner = new Owner(),
+                Neighborhoods = neighborhoods
+            };
+            return View(vm);
         }
 
         // POST: OwnerController/Create
@@ -121,6 +134,31 @@ namespace DogGo.Controllers
             {
                 return View(owner);
             }
+        }
+        public ActionResult Login()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginViewModel viewModel)
+        {
+            Owner owner = _ownerRepo.GetOwnerByEmail(viewModel.Email);
+            if (owner == null)
+            {
+                return Unauthorized();
+            }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
+                new Claim(ClaimTypes.Email, owner.Email),
+                new Claim(ClaimTypes.Role, "DogOwner"),
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+            return RedirectToAction("Index", "Dogs");
         }
         }
     }

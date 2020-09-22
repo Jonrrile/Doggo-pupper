@@ -540,3 +540,5 @@ C:\Users\Jonrr\workspace\DogGo\DogGo\bin\Debug\netcoreapp3.1\System.Text.Json.dl
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\DogGo.csproj.CoreCompileInputs.cache
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\DogGo.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\DogGo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Dogs\Index.cshtml.g.cs
+C:\Users\Jonrr\workspace\DogGo\DogGo\obj\Debug\netcoreapp3.1\Razor\Views\Owners\Login.cshtml.g.cs
